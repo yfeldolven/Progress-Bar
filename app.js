@@ -70,7 +70,9 @@ let model = {
       },
 
       progressBar : function(update){
-        view.color.style.width = model.progress.progress / model.progress.target * 100 + '%' ;
+        let progressPercent = model.progress.progress / model.progress.target * 100 ;
+        view.color.style.width = progressPercent + '%' ;
+        view.color.textContent = `Your progress ${progressPercent.toFixed(1) } %`;
         model.setLstorage(update);
       },
 
