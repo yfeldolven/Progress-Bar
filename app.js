@@ -3,7 +3,7 @@ let model = {
   progress : {
     target : 100 ,
     progress : 90 ,
-    where : '???'
+    where : 'Lesson 1'
   },
 
   setLstorage : function( update ){
@@ -36,51 +36,30 @@ control = {
 
         
         view.Done.onclick = function(){
-            model.progress.progress++ ;
-            view.progress.textContent = model.progress.progress ;
-            control.progressBar('update');
+
+            if( model.progress.progress < model.progress.target ){
+              model.progress.progress++ ;
+              view.progress.textContent = model.progress.progress ;
+              control.progressBar('update');
+            }
+
         };
 
         view.target.addEventListener( 'click' , function(){
-           view.box.style.display = 'block' ;
-           view.box.children[0].firstElementChild.value = model.progress.target;
-
-           view.box.children[0].firstElementChild.onkeyup = function(){
-              control.box(
-                  view.box.children[0].firstElementChild.value , "target" 
-              );
-              control.progressBar('update');
-           };
-
+          control.lightBox('target'); 
         });
 
-      view.progress.addEventListener( 'click' , function(){
-          view.box.style.display = 'block' ;
-          view.box.children[0].firstElementChild.value = model.progress.progress;
-
-          view.box.children[0].firstElementChild.onkeyup = function(){ 
-              control.box(
-              view.box.children[0].firstElementChild.value , "progress" 
-              );
-              control.progressBar('update');
-
-          };
-      });
+        view.progress.addEventListener( 'click' , function(){
+          control.lightBox('progress'); 
+        });
       
       
       view.where.addEventListener( 'click' , function(){
-          view.box.style.display = 'block' ;
-          view.box.children[0].firstElementChild.value = model.progress.where;
-
-          view.box.children[0].firstElementChild.onkeyup = function(){ 
-              control.box(
-              view.box.children[0].firstElementChild.value , "where" 
-              );
-              control.progressBar('update');
-
-          };
+        control.lightBox('where'); 
       });
 
+
+      
       view.close.onclick = function(){
           view.box.style.display = 'none' ;
       }
@@ -88,6 +67,21 @@ control = {
 
 
     },
+  
+    
+    lightBox : function(targettt){
+          view.box.style.display = 'block' ;
+          view.box.children[0].firstElementChild.focus();
+          view.box.children[0].firstElementChild.value = model.progress[targettt];
+
+          view.box.children[0].firstElementChild.onkeyup = function(){ 
+              control.box(
+              view.box.children[0].firstElementChild.value , targettt 
+              );
+              control.progressBar('update');
+
+          };
+      },
 
     progressBar : function(update){
       let progressPercent = model.progress.progress / model.progress.target * 100 ;
@@ -106,6 +100,7 @@ control = {
       this.start();
       this.progressBar();
   }
+
 },
     
     
