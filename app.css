@@ -44,8 +44,13 @@ body{
       background-color: blue;
       color: aliceblue;
       text-align: center;
-      display : inherit
+      display : inherit ;
+      height: 15px;
       
+  }
+
+  #yourProgress{
+      text-align: center;
   }
   
   

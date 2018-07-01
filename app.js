@@ -112,8 +112,8 @@ control = {
       let progressPercent = model.progress.progress / model.progress.target * 100 ;
       
       view.color.style.width = progressPercent + '%' ;
-      view.color.textContent = `Your progress ${progressPercent.toFixed(1) } %`;
       model.setLstorage(update);
+      view.yourProgress.textContent = `your progress ${progressPercent.toFixed(1) } %`;
     },
 
 
@@ -146,7 +146,8 @@ view = {
   box : document.querySelector('.box'),
   close : document.querySelector('.box button'),
   color : document.querySelector('#color'),
-  where : document.querySelector('#where')
+  where : document.querySelector('#where'),
+  yourProgress : document.querySelector('#yourProgress')
 };
 
 
