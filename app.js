@@ -36,7 +36,7 @@ control = {
 
         
         view.Done.onclick = function(){
-
+          
             if( model.progress.progress < model.progress.target ){
               model.progress.progress++ ;
               view.progress.textContent = model.progress.progress ;
@@ -46,11 +46,11 @@ control = {
         };
 
         view.target.addEventListener( 'click' , function(){
-          control.lightBox('target'); 
+          control.lightBox('target' , 'int'); 
         });
 
         view.progress.addEventListener( 'click' , function(){
-          control.lightBox('progress'); 
+          control.lightBox('progress' , 'int' ); 
         });
       
       
@@ -67,34 +67,67 @@ control = {
 
 
     },
+
+
+    num : function(argument){
+      let num='' , i ;
+      for(i=0 ; i<argument.length ; i++){
+        if( !isNaN( argument[i] ) ){
+          num += argument[i];
+        }
+      }
+      return parseInt(num) ;
+    },
   
     
-    lightBox : function(targettt){
+    lightBox : function(targettt , int){
           view.box.style.display = 'block' ;
           view.box.children[0].firstElementChild.focus();
           view.box.children[0].firstElementChild.value = model.progress[targettt];
 
           view.box.children[0].firstElementChild.onkeyup = function(){ 
+
               control.box(
-              view.box.children[0].firstElementChild.value , targettt 
+
+              function(){
+                if(int){
+                   return control.num( view.box.children[0].firstElementChild.value ) ;
+                }else{
+                   return view.box.children[0].firstElementChild.value ;
+                } 
+              }()
+              
+              , targettt 
+
               );
+
               control.progressBar('update');
 
           };
       },
 
+
+
     progressBar : function(update){
       let progressPercent = model.progress.progress / model.progress.target * 100 ;
+      
       view.color.style.width = progressPercent + '%' ;
       view.color.textContent = `Your progress ${progressPercent.toFixed(1) } %`;
       model.setLstorage(update);
     },
+
+
+
 
     box : function ( value , targettt ){
       model.progress[targettt] = value;
       view[targettt].textContent = model.progress[targettt] ;
     },
     
+
+
+
+
   render : function(){
       model.setLstorage();
       this.start();

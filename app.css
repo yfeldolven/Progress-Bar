@@ -1,5 +1,6 @@
 body{
     text-transform : capitalize ;
+    font-family : "Comic Sans MS", cursive, sans-serif ;
   }
   
   .box {
@@ -34,17 +35,17 @@ body{
       margin: 5%;
   }
   
+  #targetColor {
+      font-weight : bold ;
+      background-color: aquamarine ;
+  }
+  
   #color {
       background-color: blue;
       color: aliceblue;
       text-align: center;
-      position: relative ;
+      display : inherit
       
   }
   
-  #targetColor {
-      font-weight : bold ;
-      background-color: aquamarine ;
-      color: blueviolet;
-      text-align: center;
-  }
+  
